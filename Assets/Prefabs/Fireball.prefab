@@ -81,6 +81,9 @@ MonoBehaviour:
   speed: 30
   damage: 1
   fireEffect: {fileID: 1071410058245896, guid: 34826df5bd9a7a942b64a7e1277d14d2, type: 2}
+  startEffect: {fileID: 1900178204096338, guid: 2f5ceccd151e1f247ae54c3343b3d88e,
+    type: 2}
+  webEffect: {fileID: 1234317021019118, guid: 7a24e94ef0d84ec4ea10526dfc5c09e9, type: 2}
   lifetime: 3
 --- !u!212 &212400510921691936
 SpriteRenderer:

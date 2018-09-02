@@ -14,16 +14,26 @@ public class Spawner : MonoBehaviour {
     public int monsterLevel;
     public float startTimeBtwLV;
     private float timeBtwLV;
+    public int maxLevel;
+
+    private void Start()
+    {
+        timeBtwSpawn = startTimeBtwSpawn;
+        timeBtwLV = startTimeBtwLV;
+    }
 
     private void Update()
     {
         if (timeBtwLV <= 0)
         {
-            if (startTimeBtwSpawn > 1.5f) {
+            if (startTimeBtwSpawn > 1.75f) {
                 startTimeBtwSpawn -= decreaseSpawnTime;
             }
+
+            if (maxLevel > monsterLevel) {
+                monsterLevel++;
+            }
             
-            monsterLevel++;
             timeBtwLV = startTimeBtwLV;
         }
         else {

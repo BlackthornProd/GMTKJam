@@ -11,7 +11,8 @@ public class Weapon : MonoBehaviour {
     public GameObject projectile;
     public Transform shotPos;
     public float startTimeBtwShot;
-    private float timeBtwShot;
+    [HideInInspector]
+    public float timeBtwShot;
 
 	void Update () {
         if (playerSelect.isPlayerOne == one) {
@@ -32,4 +33,13 @@ public class Weapon : MonoBehaviour {
         }
    
 	}
+
+    public void IncreaseTime(float amount) {
+        StartCoroutine(IncreaseTimeCo(amount));
+    }
+
+    IEnumerator IncreaseTimeCo(float amount) {
+        yield return new WaitForSeconds(5f);
+        startTimeBtwShot += amount;
+    }
 }

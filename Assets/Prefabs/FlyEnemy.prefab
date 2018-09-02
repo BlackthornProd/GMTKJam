@@ -257,13 +257,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a6b6d37d941a94d90d11dea2501a5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 4
+  health: 2
   damage: 1
   deathEffect: {fileID: 1551209829905700, guid: d7a82fa5b11a0e0449d8e1931772f323,
     type: 2}
   pickups:
   - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
-  percentageChange: 20
+  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
+  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
+  - {fileID: 1924832719541930, guid: 2828d46447e9e084a8456bb5793337d9, type: 2}
+  percentageChange: 15
 --- !u!114 &114707255009708094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,7 +282,7 @@ MonoBehaviour:
   enemyProjectile: {fileID: 1965559591409320, guid: 0e247fe1d49d7bc4b8bf0649e1ed847f,
     type: 2}
   speed: 1
-  timeBetweenAttacks: 2
+  timeBetweenAttacks: 6
   shotPoint: {fileID: 4396901402759792}
 --- !u!212 &212234053683754504
 SpriteRenderer:

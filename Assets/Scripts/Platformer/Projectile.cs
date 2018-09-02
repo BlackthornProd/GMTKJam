@@ -7,10 +7,13 @@ public class Projectile : MonoBehaviour {
     public float speed;
     public int damage;
     public GameObject fireEffect;
+    public GameObject startEffect;
+    public GameObject webEffect;
     public float lifetime;
 
     private void Start()
     {
+        Instantiate(startEffect, transform.position, Quaternion.identity);
         Invoke("Death", lifetime);
     }
 
@@ -27,6 +30,11 @@ public class Projectile : MonoBehaviour {
         } else if (other.CompareTag("Player")) {
             other.GetComponent<PlayerTopDown>().TakeDamage(damage);
             Death();
+        }  else if (other.CompareTag("Web"))
+        {
+            Instantiate(webEffect, transform.position, Quaternion.identity);
+            Debug.Log("Webbbbbbb");
+            other.GetComponent<Web>().playerWebed.DeWebify(other.GetComponent<Web>());
         }
     }
 

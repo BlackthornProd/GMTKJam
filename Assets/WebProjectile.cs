@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyProjectile : MonoBehaviour
-{
+public class WebProjectile : MonoBehaviour {
 
     PlayerTopDown[] playerScript;
     Vector2 targetPosition;
@@ -12,12 +11,12 @@ public class EnemyProjectile : MonoBehaviour
     public float speed;
     public int damage;
 
+
     public GameObject effect;
-    public float lifetime;
 
     private void Start()
     {
-       // Invoke("Death", lifetime);
+        // Invoke("Death", lifetime);
         playerScript = FindObjectsOfType<PlayerTopDown>();
 
         float distance = float.MaxValue;
@@ -60,17 +59,17 @@ public class EnemyProjectile : MonoBehaviour
 
         if (other.tag == "Player")
         {
-
+            
             targetPlayer.TakeDamage(damage);
+            other.GetComponent<PlayerTopDown>().Webify();
             Death();
         }
 
     }
 
-    void Death() {
+    void Death()
+    {
         Instantiate(effect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-
 }
-

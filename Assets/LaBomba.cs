@@ -2,21 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeartAura : MonoBehaviour
+public class LaBomba : MonoBehaviour
 {
 
     public float lifetime;
     public float neededDistance;
     public Sprite[] sprites;
-    public float waitTimeBeforeHeal;
-    public int healAmount;
+    public float waitTimeBeforeBomb;
+    public float timeEffect;
+    public float amount;
 
     SpriteRenderer rend;
     GameObject[] players;
 
     public GameObject effect;
     private Animator anim;
-    bool both;
+
+    bool done;
 
     void Start()
     {
@@ -36,15 +38,17 @@ public class HeartAura : MonoBehaviour
             {
 
                 rend.sprite = sprites[2];
-                if (waitTimeBeforeHeal <= 0)
+                if (waitTimeBeforeBomb <= 0 && !done)
                 {
+                    done = true;
                     Instantiate(effect, transform.position, Quaternion.identity);
-                    players[0].GetComponent<PlayerTopDown>().Heal(healAmount);
-                    Destroy(gameObject);
+
+
+                    TimeDown();
                 }
                 else
                 {
-                    waitTimeBeforeHeal -= Time.deltaTime;
+                    waitTimeBeforeBomb -= Time.deltaTime;
                 }
             }
         }
@@ -66,6 +70,17 @@ public class HeartAura : MonoBehaviour
         yield return new WaitForSeconds(1.25f);
         Destroy(gameObject);
 
+
+    }
+
+
+    void TimeDown () {
+        Weapon[] weapon = FindObjectsOfType<Weapon>();
+        weapon[0].startTimeBtwShot = weapon[0].startTimeBtwShot - amount;
+        weapon[1].startTimeBtwShot = weapon[1].startTimeBtwShot - amount;
+        weapon[0].IncreaseTime(amount);
+        weapon[1].IncreaseTime(amount);
+        Destroy(gameObject);
 
     }
 

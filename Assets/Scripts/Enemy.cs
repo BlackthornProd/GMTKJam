@@ -7,11 +7,17 @@ public class Enemy : MonoBehaviour {
     public int health;
     public int damage;
 
+    private Animator camAnim;
     public GameObject deathEffect;
 
     public GameObject[] pickups;
     public float percentageChange;
 
+
+    private void Start()
+    {
+        camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>(); 
+    }
 
     private void Update()
     {
@@ -21,6 +27,7 @@ public class Enemy : MonoBehaviour {
     }
 
     public void TakeDamage(int damage) {
+        camAnim.SetTrigger("shake");
         health -= damage;
     }
 

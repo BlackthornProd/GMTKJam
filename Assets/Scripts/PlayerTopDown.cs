@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTopDown : MonoBehaviour {
-
+    public float startSpeed;
     public float speed;
     private Rigidbody2D rb;
     private Animator anim;
@@ -13,10 +13,13 @@ public class PlayerTopDown : MonoBehaviour {
     public GameObject arrow;
     public bool one;
 
+    public GameObject webAffect;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        startSpeed = speed;
     }
 
     private void Update()
@@ -61,4 +64,24 @@ public class PlayerTopDown : MonoBehaviour {
         }
 
     }
+
+    public void Webify () {
+        GameObject w = Instantiate(webAffect, transform.position, transform.rotation);
+        w.GetComponent<Web>().playerWebed = this;
+        speed = 0;
+        transform.Find("weapon").GetComponent<Weapon>().startTimeBtwShot += 100000;
+        transform.Find("weapon").GetComponent<Weapon>().timeBtwShot += 100000;
+
+    }
+
+
+    public void DeWebify(Web web)
+    {
+        Destroy(web.gameObject);
+        speed = startSpeed;
+        transform.Find("weapon").GetComponent<Weapon>().startTimeBtwShot -= 100000;
+        transform.Find("weapon").GetComponent<Weapon>().timeBtwShot -= 100000;
+    }
+
+
 }
