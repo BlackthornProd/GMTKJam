@@ -10,11 +10,14 @@ public class Spawner : MonoBehaviour {
 
     public GameObject[] monsters;
     public Transform[] spawnSpots;
+    public PlayerSelect playerSelect;
 
     public int monsterLevel;
     public float startTimeBtwLV;
     private float timeBtwLV;
     public int maxLevel;
+
+    bool stopSpawning;
 
     private void Start()
     {
@@ -24,32 +27,45 @@ public class Spawner : MonoBehaviour {
 
     private void Update()
     {
-        if (timeBtwLV <= 0)
-        {
-            if (startTimeBtwSpawn > 1.75f) {
-                startTimeBtwSpawn -= decreaseSpawnTime;
+        if (stopSpawning == false) {
+            if (timeBtwLV <= 0)
+            {
+                if (startTimeBtwSpawn > 1.9f)
+                {
+                    startTimeBtwSpawn -= decreaseSpawnTime;
+                }
+
+                if (maxLevel > monsterLevel)
+                {
+                    monsterLevel++;
+                }
+                else
+                {
+                    playerSelect.canSpawnBoss = true;
+                    stopSpawning = true;
+                }
+
+                timeBtwLV = startTimeBtwLV;
+            }
+            else
+            {
+                timeBtwLV -= Time.deltaTime;
             }
 
-            if (maxLevel > monsterLevel) {
-                monsterLevel++;
+
+            if (timeBtwSpawn <= 0)
+            {
+                int randPos = Random.Range(0, spawnSpots.Length);
+                int rand = Random.Range(0, monsterLevel);
+                Instantiate(monsters[rand], spawnSpots[randPos].position, Quaternion.identity);
+                timeBtwSpawn = startTimeBtwSpawn;
             }
-            
-            timeBtwLV = startTimeBtwLV;
+            else
+            {
+                timeBtwSpawn -= Time.deltaTime;
+            }
         }
-        else {
-            timeBtwLV -= Time.deltaTime;
-        }
-
-
-        if (timeBtwSpawn <= 0)
-        {
-            int randPos = Random.Range(0, spawnSpots.Length);
-            int rand = Random.Range(0, monsterLevel);
-            Instantiate(monsters[rand], spawnSpots[randPos].position, Quaternion.identity);
-            timeBtwSpawn = startTimeBtwSpawn;
-        }
-        else {
-            timeBtwSpawn -= Time.deltaTime;
-        }
+        
     }
+
 }

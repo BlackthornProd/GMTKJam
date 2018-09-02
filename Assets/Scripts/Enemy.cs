@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour {
 
     private Animator camAnim;
     public GameObject deathEffect;
+    private AddEnemy add;
 
     public GameObject[] pickups;
     public float percentageChange;
@@ -16,6 +17,7 @@ public class Enemy : MonoBehaviour {
 
     private void Start()
     {
+        add = GetComponent<AddEnemy>();
         camAnim = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Animator>(); 
     }
 
@@ -46,7 +48,7 @@ public class Enemy : MonoBehaviour {
         {
             Instantiate(pickups[Random.Range(0, pickups.Length)], transform.position, transform.rotation);
         }
-
+        add.Remove();
         Instantiate(deathEffect, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

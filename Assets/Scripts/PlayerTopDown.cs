@@ -14,6 +14,7 @@ public class PlayerTopDown : MonoBehaviour {
     public bool one;
 
     public GameObject webAffect;
+    public Animator redPanels;
 
     private void Start()
     {
@@ -24,34 +25,47 @@ public class PlayerTopDown : MonoBehaviour {
 
     private void Update()
     {
-        Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        moveVelocity = moveInput.normalized * speed;
 
-        if (moveInput != Vector2.zero && playerSelect.isPlayerOne == one)
-        {
-            anim.SetBool("isRunning", true);
-        }
-        else {
-            anim.SetBool("isRunning", false);
-        }
+        if (playerSelect.health > 0) {
+            Vector2 moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            moveVelocity = moveInput.normalized * speed;
 
-        if(one == playerSelect.isPlayerOne) {
-            arrow.SetActive(true);
-        } else {
-            arrow.SetActive(false);
+            if (moveInput != Vector2.zero && playerSelect.isPlayerOne == one)
+            {
+                anim.SetBool("isRunning", true);
+            }
+            else
+            {
+                anim.SetBool("isRunning", false);
+            }
+
+            if (one == playerSelect.isPlayerOne)
+            {
+                arrow.SetActive(true);
+            }
+            else
+            {
+                arrow.SetActive(false);
+            }
         }
+        
     }
 
     private void FixedUpdate()
     {
-        if (one == playerSelect.isPlayerOne) {
+        if (one == playerSelect.isPlayerOne && playerSelect.health > 0) {
             rb.MovePosition(rb.position + moveVelocity * Time.fixedDeltaTime);
         }
         
     }
 
     public void TakeDamage(int damage) {
-        playerSelect.health -= damage;
+        if (playerSelect.health > 0) {
+            playerSelect.Sound();
+            redPanels.SetTrigger("flash");
+            playerSelect.health -= damage;
+        }
+        
     }
 
     public void Heal(int amount)
@@ -66,6 +80,7 @@ public class PlayerTopDown : MonoBehaviour {
     }
 
     public void Webify () {
+
         GameObject w = Instantiate(webAffect, transform.position, transform.rotation);
         w.GetComponent<Web>().playerWebed = this;
         speed = 0;

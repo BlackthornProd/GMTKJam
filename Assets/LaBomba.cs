@@ -17,11 +17,13 @@ public class LaBomba : MonoBehaviour
 
     public GameObject effect;
     private Animator anim;
+    public GameObject sound;
 
     bool done;
 
     void Start()
     {
+
         anim = GetComponent<Animator>();
         rend = GetComponent<SpriteRenderer>();
         players = GameObject.FindGameObjectsWithTag("Player");
@@ -31,7 +33,7 @@ public class LaBomba : MonoBehaviour
     private void Update()
     {
 
-        if ((Vector2.Distance(transform.position, players[0].transform.position) < neededDistance) || (Vector2.Distance(transform.position, players[1].transform.position) < neededDistance))
+       /* if ((Vector2.Distance(transform.position, players[0].transform.position) < neededDistance) || (Vector2.Distance(transform.position, players[1].transform.position) < neededDistance))
         {
             rend.sprite = sprites[1];
             if ((Vector2.Distance(transform.position, players[0].transform.position) < neededDistance) && (Vector2.Distance(transform.position, players[1].transform.position) < neededDistance))
@@ -55,12 +57,24 @@ public class LaBomba : MonoBehaviour
         else
         {
             rend.sprite = sprites[0];
-        }
+        }*/
 
 
 
 
     }
+
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player")) {
+            Instantiate(sound, transform.position, Quaternion.identity);
+            TimeDown();
+            Instantiate(effect, transform.position, Quaternion.identity);
+            Destroy(gameObject);
+        }
+    }
+
 
     IEnumerator Die()
     {

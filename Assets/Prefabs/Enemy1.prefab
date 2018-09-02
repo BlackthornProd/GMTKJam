@@ -120,6 +120,7 @@ GameObject:
   - component: {fileID: 50712127435923040}
   - component: {fileID: 114733938942862558}
   - component: {fileID: 114026307953507894}
+  - component: {fileID: 114492292835080984}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Enemy
@@ -289,6 +290,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
+--- !u!114 &114492292835080984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1967329502305722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a03360c490f3734781d07df0480a287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114733938942862558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,11 +317,8 @@ MonoBehaviour:
   deathEffect: {fileID: 1551209829905700, guid: d7a82fa5b11a0e0449d8e1931772f323,
     type: 2}
   pickups:
-  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
+  - {fileID: 1339674374033012, guid: 80d3e4ee4103fa94c8eeb95384199be0, type: 2}
   - {fileID: 1924832719541930, guid: 2828d46447e9e084a8456bb5793337d9, type: 2}
-  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
-  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
-  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
   percentageChange: 15
 --- !u!212 &212245514274950652
 SpriteRenderer:

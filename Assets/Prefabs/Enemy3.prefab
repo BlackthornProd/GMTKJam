@@ -72,6 +72,7 @@ GameObject:
   - component: {fileID: 50991028080670718}
   - component: {fileID: 114713588634092540}
   - component: {fileID: 114014115641017764}
+  - component: {fileID: 114219499798733888}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Enemy
@@ -289,6 +290,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
+--- !u!114 &114219499798733888
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1693931324652588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a03360c490f3734781d07df0480a287, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114713588634092540
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,9 +317,9 @@ MonoBehaviour:
   deathEffect: {fileID: 1551209829905700, guid: d7a82fa5b11a0e0449d8e1931772f323,
     type: 2}
   pickups:
-  - {fileID: 1226017491021324, guid: 8e1b48b326ee3354caecf1fae05fe311, type: 2}
+  - {fileID: 1339674374033012, guid: 80d3e4ee4103fa94c8eeb95384199be0, type: 2}
   - {fileID: 1924832719541930, guid: 2828d46447e9e084a8456bb5793337d9, type: 2}
-  percentageChange: 20
+  percentageChange: 15
 --- !u!212 &212053498287122186
 SpriteRenderer:
   m_ObjectHideFlags: 1

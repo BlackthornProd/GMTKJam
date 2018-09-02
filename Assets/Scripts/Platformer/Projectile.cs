@@ -30,11 +30,14 @@ public class Projectile : MonoBehaviour {
         } else if (other.CompareTag("Player")) {
             other.GetComponent<PlayerTopDown>().TakeDamage(damage);
             Death();
-        }  else if (other.CompareTag("Web"))
+        } else if (other.CompareTag("Web"))
         {
             Instantiate(webEffect, transform.position, Quaternion.identity);
             Debug.Log("Webbbbbbb");
             other.GetComponent<Web>().playerWebed.DeWebify(other.GetComponent<Web>());
+        } else if (other.CompareTag("Boss")) {
+            other.GetComponent<Boss>().TakeDamage(damage);
+            Death();
         }
     }
 

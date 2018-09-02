@@ -8,19 +8,55 @@ public class PlayerSelect : MonoBehaviour {
     public bool isPlayerOne;
     public int health;
     public Slider healthBar;
-  
+    public int maxHealth;
 
-   /* public Slider staminaOne;
-    public Slider staminaTwo;
-    public float staminaOneValue;
-    public float staminaTwoValue;*/
+    public int enemiesInGame;
+    public bool canSpawnBoss;
+    public GameObject boss;
+    public GameObject slider;
+    /* public Slider staminaOne;
+     public Slider staminaTwo;
+     public float staminaOneValue;
+     public float staminaTwoValue;*/
 
-        
+    public Transform[] poses;
+    public GameObject skull;
+    public GameObject deathEffect;
+    bool done;
+    public GameObject restartOptions;
+    public GameObject bossSlider;
+    private AudioSource source;
+
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
+        if (health > maxHealth) {
+            health = maxHealth;
+        }
 
+        if (health <= 0 && done == false) {
+            
+            restartOptions.SetActive(true);
+            Instantiate(skull, poses[0].position, Quaternion.identity);
+            Instantiate(deathEffect, poses[0].position, Quaternion.identity);
+            Instantiate(skull, poses[1].position, Quaternion.identity);
+            Instantiate(deathEffect, poses[1].position, Quaternion.identity);
+            Vector2 newTarget = new Vector2(10000, 10000);
+            poses[0].position = newTarget;
+            poses[1].position = newTarget;
+            done = true;
+        }
 
+        if (canSpawnBoss == true && enemiesInGame <= 0) {
+            bossSlider.SetActive(true);
+            slider.SetActive(true);
+            StartCoroutine(SpawnBoss());
+            canSpawnBoss = false;
+        }
 
         healthBar.value = health;
 
@@ -65,5 +101,16 @@ public class PlayerSelect : MonoBehaviour {
             }
         }
         
+    }
+
+    public void Sound() {
+        source.Play();
+    }
+
+
+    IEnumerator SpawnBoss()
+    {
+        yield return new WaitForSeconds(3f);
+        Instantiate(boss, transform.position, Quaternion.identity);
     }
 }
